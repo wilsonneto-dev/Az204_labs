@@ -1,3 +1,32 @@
 build image:
 docker build . --file Dockerfile --tag test-project
 
+az acr login ou docker login
+
+----
+Create a acr by cli and upload image by cli:
+criar os recursos
+-> az group create --location eastus2 --name az204-containers
+-> az acr create --resource-group az204-containers --name az204wnbracr --sku standard
+
+fazer login no CR e pegar o server
+-> az acr login --name az204wnbracr
+-> az acr show --name az204wnbracr
+-> 65 az acr show --name az204wnbracr --query loginServer --output tsv
+
+taguear a imagem para subir no CR
+-> docker image ls test/*
+-> docker tag test/test-project az204wnbracr.azurecr.io/test01:v1
+-> docker push az204wnbracr.azurecr.io/test01:v1
+
+ou já buildar e já subir pelo cli msm
+-> az acr build --image "webapp:v2-acr-task" --registry az204wnbracr.azurecr.io .
+
+ver os repos no CR e as tags de uma imagem
+-> az acr repository list --name az204wnbracr --output table
+-> az acr repository show-tags --name az204wnbracr --repository test01 --output table
+
+criando o service principal para usar pull:
+az ad sp create-for-rbac --name http://az204wnbracr-pull --scopes /subscriptions/38a7c231-6851-4ca6-9bff-315cd5b8ebc8/resourceGroups/az204-containers/providers/Microsoft.ContainerRegistry/registries/az204wnbracr --role acrpull --query password --output tsv
+az ad sp show --id http://az204wnbracr-pull --query appId --output tsv
+
