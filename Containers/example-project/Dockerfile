@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0.0-preview.5-alpine3.12
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
-COPY /app/out .
-ENTRYPOINT ["dotnet", "SiteContagem.dll"]
+COPY ./out ./
+ENTRYPOINT ["dotnet", "example-project.dll"]
