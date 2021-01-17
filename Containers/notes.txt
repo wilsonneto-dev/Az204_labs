@@ -30,3 +30,16 @@ criando o service principal para usar pull:
 az ad sp create-for-rbac --name http://az204wnbracr-pull --scopes /subscriptions/38a7c231-6851-4ca6-9bff-315cd5b8ebc8/resourceGroups/az204-containers/providers/Microsoft.ContainerRegistry/registries/az204wnbracr --role acrpull --query password --output tsv
 az ad sp show --id http://az204wnbracr-pull --query appId --output tsv
 
+deploy a Container from image with CLI:
+az container create `
+>> --resource-group az204-containers `
+>> --name webapp202120 `
+>> --dns-name-label webapp-az204-demo-wnbr `
+>> --ports 80 `
+>> --image az204wnbracr.azurecr.io/test01:v1 `
+>> --registry-login-server az204wnbracr.azurecr.io `
+>> --registry-username xxxx --registry-password yyy
+
+apagar o container
+-> az container delete --resource-group az204-containers --name wnbr-az204-ci --yes
+-> az group delete --name az204-containers

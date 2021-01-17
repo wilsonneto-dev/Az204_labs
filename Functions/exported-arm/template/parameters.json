@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionId": {
+            "value": "38a7c231-6851-4ca6-9bff-315cd5b8ebc8"
+        },
+        "name": {
+            "value": "FunctionAppAz20401"
+        },
+        "location": {
+            "value": "East US 2"
+        },
+        "hostingPlanName": {
+            "value": "ASP-Az204Functions-9c3e"
+        },
+        "serverFarmResourceGroup": {
+            "value": "Az204Functions"
+        },
+        "alwaysOn": {
+            "value": false
+        },
+        "storageAccountName": {
+            "value": "storageaccountaz204a397"
+        },
+        "sku": {
+            "value": "Dynamic"
+        },
+        "skuCode": {
+            "value": "Y1"
+        },
+        "workerSize": {
+            "value": "0"
+        },
+        "workerSizeId": {
+            "value": "0"
+        },
+        "numberOfWorkers": {
+            "value": "1"
+        },
+        "use32BitWorkerProcess": {
+            "value": false
+        },
+        "linuxFxVersion": {
+            "value": "dotnet|3.1"
+        }
+    }
+}

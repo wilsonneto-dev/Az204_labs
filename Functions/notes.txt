@@ -1,0 +1,27 @@
+CLI commands:
+
+Iniciar FunctionApp local:
+-> func init LocalFunctionProj --dotnet
+
+Ou:
+-> func init myapp (após selecionar os parametros)
+
+Ciar uma function:
+-> func new --name HttpExample --template "HTTP Trigger" --authlevel "anonymous
+
+Publicar a function:
+-> func azure functionapp publish FunctionAppAz20401
+
+---
+Provisionar todos os recursos para a function:
+create a group:
+-> az group create --name az204-function-cli --location eastus2
+
+criar uma storage account para a function:
+-> az storage account create --name az204funcstorage --location eastus2 --resource-group az204-function-cli --sku Standard_LRS
+
+criar um app insights:
+-> az resource create --resource-group az204-function-cli --name az204func-insights --resource-type 'Microsoft.Insights/components' --properties '{\"Application_Type\": \"web\"}'
+
+criar o app das functions:
+-> az functionapp create --name 'az204-cli-funcapp' --storage-account az204funcstorage --consumption-plan-location eastus2 --app-insights az204func-insights --runtime dotnet --resource-group az204-function-cli

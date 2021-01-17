@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageCount": {
+      "type": "int",
+      "defaultValue": 2
+    },
+    "AcrName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2019-04-01",
+      "name": "[concat(copyIndex(),'storage', uniqueString(resourceGroup().id))]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "Storage",
+      "properties": {},
+      "copy": {
+        "name": "storagecopy",
+        "count": "[parameters('storageCount')]"
+      }
+    },
+    {
+      "name": "[parameters('AcrName')]",
+      "type": "Microsoft.ContainerRegistry/registries",
+      "apiVersion": "2019-12-01-preview",
+      "location": "East US 2",
+      "tags": {},
+      "sku": {
+        "name": "Basic"
+      },
+      "properties": {
+        "adminUserEnabled": true,
+        "networkRuleSet": {
+          "defaultAction": "Allow",
+          "virtualNetworkRules": [
+            {
+              "action": "Allow",
+              "id": "string"
+            }
+          ],
+          "ipRules": [
+            {
+              "action": "Allow",
+              "value": "string"
+            }
+          ]
+        },
+        "policies": {
+          "quarantinePolicy": {
+            "status": "string"
+          },
+          "trustPolicy": {
+            "type": "Notary",
+            "status": "string"
+          },
+          "retentionPolicy": {
+            "days": "integer",
+            "status": "string"
+          }
+        },
+        "encryption": {
+          "status": "string",
+          "keyVaultProperties": {
+            "keyIdentifier": "string",
+            "identity": "string"
+          }
+        },
+        "dataEndpointEnabled": "boolean",
+        "publicNetworkAccess": "string"
+      },
+      "resources": []
+    }
+  ],
+  "outputs": {}
+}
