@@ -1,0 +1,4 @@
+Fechar módulo do az functions:
+- criar uma function com input e output bindings
+- criar uma durable function para entender a orquestração e etc
+
